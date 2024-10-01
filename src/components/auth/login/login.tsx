@@ -1,12 +1,12 @@
-
 "use client"
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import '../style/auth.css'; // Add the CSS file
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { SignInValidation } from '@/lib/validate'
 import { Button } from "@/components/ui/button"
-import { useState } from "react"
 import PropagateLoader from "react-spinners/PropagateLoader"
 import {
     Form,
@@ -33,6 +33,7 @@ const login = () => {
             password: "",
         },
     })
+
     // Set persistence in a client component or useEffect hook
     useEffect(() => {
         setPersistence(auth, browserLocalPersistence)
@@ -43,23 +44,24 @@ const login = () => {
                 console.error('Error setting persistence:', error);
             });
     }, []);
+
     async function onSubmit(values: z.infer<typeof SignInValidation>) {
         setLoading(true)
         try {
             await signInWithEmailAndPassword(auth, values.email, values.password)
-        }
-        catch (e) {
+        } catch (e) {
             console.error('There was an error with sign in: ', e)
         }
         router.push('/')
         setLoading(false)
     }
+
     return (
-        <div className='login-center-container'>
+        <div className="auth-center-container">
             <Form {...form}>
-                <div className='sm:w-420 flex-center flex-col py-3 '>
-                    <h2 className='h3-bold md:h2-bold font-bold text-4xl pb-1 text-center'>meatmeal</h2>
-                    <h3 className='text-center'>Login</h3>
+                <div className="sm:w-420 flex-center flex-col py-3">
+                    <h2 className="font-bold text-4xl pb-1 text-center">meatmeal</h2>
+                    <h3 className="text-center">Login</h3>
                 </div>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <FormField
@@ -88,17 +90,19 @@ const login = () => {
                             </FormItem>
                         )}
                     />
-                    <h3><a href="/auth/forgotpassword" id="forgot-password">Forgot Password?</a></h3>
-                    <div className='flex justify-center'>
-                        {loading ?
+                    <h3><Link href="/auth/forgotpassword" id="forgot-password">Forgot Password?</Link></h3>
+                    <div className="flex justify-center">
+                        {loading ? (
                             <PropagateLoader className='align-self-center' />
-                            :
-                            <Button className='w-full hover:bg-blue-700' type="submit">Login</Button>
-                        }
+                        ) : (
+                            <Button id="login-button" className="w-full hover:bg-blue-700" type="submit">Login</Button>
+                        )}
                     </div>
-                    <h3 id="new-to-unionizer">New to meatmeal? <Link href="/auth/signup" id="join-now">Join now</Link></h3>
+                    <h3 id="new-to-meatmeal">New to meatmeal? <Link href="/auth/signup" id="join-now">Join now</Link></h3>
                 </form>
             </Form>
-        </div>)
+        </div>
+    )
 }
-export default login
+
+export default login;

@@ -27,7 +27,7 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Recipe Finder</h1>
+            <h1>meatmeal</h1>
             <form id="ingredient-form" onSubmit={fetchRecipes}>
                 <input 
                     type="text" 

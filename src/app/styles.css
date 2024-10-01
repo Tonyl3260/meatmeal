@@ -5,18 +5,19 @@ body {
     background-color: #f4f4f9;
     color: #333;
     text-align: center;
-    padding-top: 30px;
+    padding-top: 80px; 
     min-height: 100vh;
 }
 
 h1 {
     color: #2c3e50;
-    margin-bottom: 5px;
-    font-size: 35px;
+    font-size: 40px; 
+
 }
 
 #ingredient-form {
     display: inline-block;
+    margin: 5px;
 }
 
 #ingredients {
@@ -25,12 +26,13 @@ h1 {
     border-radius: 4px;
     height: 40px;
     width: 300px;
+    margin-bottom: 5px;
 }
 
 button {
     display: block;
     margin: 10px auto 0;
-    padding: 7px 15px;
+    padding: 8px 16px;
     border: none;
     border-radius: 4px;
     background-color: #3498db;
@@ -69,7 +71,7 @@ button:hover {
     height: auto;
     object-fit: cover;
     margin: 10px;
-    margin-right:20px;
+    margin-right: 20px;
     border-radius: 8px;
 }
 
