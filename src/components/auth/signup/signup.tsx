@@ -83,7 +83,7 @@ const signup = () => {
     }
 
     return (
-        <div className="auth-center-container">
+        <div className="auth-center-container-signup">
             <Form {...form}>
                 <div className="sm:w-420 flex-center flex-col py-3">
                     <h2 className="font-bold text-4xl pb-1 text-center">meatmeal</h2>

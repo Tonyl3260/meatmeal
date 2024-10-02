@@ -57,7 +57,7 @@ const login = () => {
     }
 
     return (
-        <div className="auth-center-container">
+        <div className="auth-center-container-login">
             <Form {...form}>
                 <div className="sm:w-420 flex-center flex-col py-3">
                     <h2 className="font-bold text-4xl pb-1 text-center">meatmeal</h2>
@@ -73,7 +73,6 @@ const login = () => {
                                 <FormControl>
                                     <Input placeholder="Enter your email" {...field} />
                                 </FormControl>
-                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -86,7 +85,6 @@ const login = () => {
                                 <FormControl>
                                     <Input placeholder="Enter your password" type='password' {...field} />
                                 </FormControl>
-                                <FormMessage />
                             </FormItem>
                         )}
                     />

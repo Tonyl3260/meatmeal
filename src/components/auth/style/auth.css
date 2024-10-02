@@ -1,18 +1,32 @@
 /* Centered Container for Authentication */
-.auth-center-container {
+.auth-center-container-signup {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 500px;
-    max-height: 600px;
+    max-width: 450px;
+    max-height: 550px;
     margin-top: 10vh;
-    padding: 30px;
     background-color: white;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
+
+.auth-center-container-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    max-height: 450px;
+    margin-top: 15vh;
+    background-color: white;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
 
 @media (max-width: 600px) {
     .auth-center-container {
@@ -28,11 +42,8 @@ h2, h3 {
 }
 
 /* Input Fields */
-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+form {
+    width: 80%;
     margin-bottom: 15px;
     font-size: 16px;
 }

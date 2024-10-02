@@ -1,20 +1,44 @@
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Ensure router is imported
 import './styles.css';
 
 const Home = () => {
     const [ingredients, setIngredients] = useState('');
     const [recipes, setRecipes] = useState([]);
     const [error, setError] = useState('');
+    const router = useRouter(); // Initialize the router
 
     const fetchRecipes = async (event) => {
         event.preventDefault(); // Prevent the form from submitting in the traditional way
         try {
             const res = await fetch(`http://localhost:4000/recipes?ingredients=${encodeURIComponent(ingredients)}`);
             const data = await res.json();
+            
             if (data && data.length) {
-                setRecipes(data);
-                setError('');  // Clear any previous errors
+                const ingredientsArray = ingredients.split(',').map(ing => ing.trim().toLowerCase()); // Convert your ingredients into an array and trim whitespace
+
+                // Filter recipes to only include those that contain all the specified ingredients
+                const filteredRecipes = data.filter(recipe => {
+                    // Extract used and missed ingredients names from the recipe
+                    const recipeIngredients = [
+                        ...recipe.usedIngredients.map(ing => ing.name.toLowerCase()),
+                        ...recipe.missedIngredients.map(ing => ing.name.toLowerCase())
+                    ];
+
+                    // Check if all the specified ingredients are present in the recipe
+                    return ingredientsArray.every(ingredient =>
+                        recipeIngredients.includes(ingredient)
+                    );
+                });
+
+                if (filteredRecipes.length > 0) {
+                    setRecipes(filteredRecipes); // Display the filtered recipes with all specified ingredients
+                    setError('');  // Clear any previous errors
+                } else {
+                    setError('No recipes found with the specified ingredients.');
+                    setRecipes([]);  // Clear previous recipes
+                }
             } else {
                 setError('No recipes found.');
                 setRecipes([]);  // Clear previous recipes
@@ -22,7 +46,13 @@ const Home = () => {
         } catch (error) {
             console.error('Error fetching from backend:', error);
             setError('Failed to fetch recipes. Please try again.');
+            setRecipes([]); // Clear previous recipes
         }
+    };
+
+    // Handle recipe click and navigate to the recipe page
+    const handleRecipeClick = (id) => {
+        router.push(`/recipes/${id}`); // Navigate to a new dynamic page with the recipe ID
     };
 
     return (
@@ -34,15 +64,19 @@ const Home = () => {
                     id="ingredients" 
                     value={ingredients} 
                     onChange={(e) => setIngredients(e.target.value)}
-                    placeholder="Enter ingredients"
+                    placeholder="Enter ingredients (comma separated)"
                 />
                 <button type="submit">Find Recipes</button>
             </form>
             {error && <p>{error}</p>}
-            {recipes.length > 0 && (
+            {recipes.length > 0 ? (
                 <div id="recipe-results">
                     {recipes.map(recipe => (
-                        <div key={recipe.id} className="recipe">
+                        <div 
+                            key={recipe.id} 
+                            className="recipe" 
+                            onClick={() => handleRecipeClick(recipe.id)} // Add onClick to handle recipe click
+                        >
                             <img 
                                 src={recipe.image} 
                                 alt={recipe.title} 
@@ -56,6 +90,8 @@ const Home = () => {
                         </div>
                     ))}
                 </div>
+            ) : (
+                error && <p>Please try with different ingredients.</p>
             )}
         </div>
     );

@@ -33,8 +33,6 @@ const Navbar = () => {
           <span className="navbar-title">meatmeal</span>
         </a>
         <ul className="navbar-links">
-          <li><Link href="/" className="navbar-link">Home</Link></li>
-          <li><Link href="/about" className="navbar-link">About</Link></li>
           {isLoading ? (
             <li><span className="navbar-link">Loading...</span></li>
           ) : isAuthenticated ? (
