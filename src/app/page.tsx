@@ -14,7 +14,7 @@ const Home = () => {
         try {
             const res = await fetch(`http://localhost:4000/recipes?ingredients=${encodeURIComponent(ingredients)}`);
             const data = await res.json();
-            
+
             if (data && data.length) {
                 const ingredientsArray = ingredients.split(',').map(ing => ing.trim().toLowerCase()); // Convert your ingredients into an array and trim whitespace
 
@@ -58,28 +58,29 @@ const Home = () => {
     return (
         <div>
             <h1>meatmeal</h1>
-            <form id="ingredient-form" onSubmit={fetchRecipes}>
-                <input 
-                    type="text" 
-                    id="ingredients" 
-                    value={ingredients} 
+            <form id="ingredient-form" onSubmit={fetchRecipes} style={{ textAlign: 'center' }}>
+                <input
+                    type="text"
+                    id="ingredients"
+                    value={ingredients}
                     onChange={(e) => setIngredients(e.target.value)}
                     placeholder="Enter ingredients (comma separated)"
+                    style={{ display: 'block', margin: '0 auto' }}
                 />
-                <button type="submit">Find Recipes</button>
+                <button style={{ display: 'block', margin: '10px auto 0' }}>Find Recipes</button>
             </form>
             {error && <p>{error}</p>}
             {recipes.length > 0 ? (
                 <div id="recipe-results">
                     {recipes.map(recipe => (
-                        <div 
-                            key={recipe.id} 
-                            className="recipe" 
+                        <div
+                            key={recipe.id}
+                            className="recipe"
                             onClick={() => handleRecipeClick(recipe.id)} // Add onClick to handle recipe click
                         >
-                            <img 
-                                src={recipe.image} 
-                                alt={recipe.title} 
+                            <img
+                                src={recipe.image}
+                                alt={recipe.title}
                                 className="recipe-image"
                             />
                             <div className="recipe-details">

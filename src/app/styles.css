@@ -1,11 +1,10 @@
-body { 
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f9;
     color: #333;
     text-align: center;
-    padding-top: 70px; 
     min-height: 100vh;
 }
 
@@ -15,17 +14,20 @@ h1 {
 }
 
 #ingredient-form {
-    display: inline-block;
-    margin: 5px;
-}
-
-#ingredients {
-    padding: 12px; /* Slightly bigger input padding */
+    text-align: center;
+    margin: 5px auto;
+    width: 300px;
+    max-width: 100%;
+  }
+  
+  #ingredients {
+    width: 100%;
+    max-width: 300px; 
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    height: 45px;
-    width: 320px; /* Increase input width */
-}
+    margin: 0 auto;
+  }
 
 button {
     display: block;
