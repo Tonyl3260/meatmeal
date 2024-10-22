@@ -11,7 +11,7 @@ app.use(cors());
 app.get('/recipes', async (req, res) => {
   const ingredients = req.query.ingredients;
   const apiKey = process.env.SPOONACULAR_API_KEY;
-  const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${encodeURIComponent(ingredients)}&number=100`;
+  const url = `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${encodeURIComponent(ingredients)}&number=100&ranking=2`;
 
   try {
     const response = await axios.get(url);
@@ -49,13 +49,8 @@ app.get('/recipes/:id', async (req, res) => {
       title: response.data.title,
       image: response.data.image,
       ingredients: response.data.extendedIngredients.map(ingredient => ingredient.name),
-      instructions: response.data.instructions,
+      steps: response.data.analyzedInstructions.length > 0 ? response.data.analyzedInstructions[0].steps : []
     };
-
-    // Check if the instructions exist and clean up any HTML tags
-    if (recipeDetails.instructions) {
-      recipeDetails.instructions = recipeDetails.instructions.replace(/<\/?li>|<\/?ol>/g, "");
-    }
 
     console.log(recipeDetails);
 

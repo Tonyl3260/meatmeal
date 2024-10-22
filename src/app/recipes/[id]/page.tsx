@@ -65,7 +65,12 @@ const RecipePage = ({ params }: { params: { id: string } }) => {
                 </div>
                 <div className="recipe-instructions">
                     <h2>Directions</h2>
-                    <p>{recipe.instructions}</p>
+                    <ol>
+                        {recipe.steps.map((step: any, index: number) => (
+                            
+                            <li key={index}>{step.step}</li>
+                        ))}
+                    </ol>
                 </div>
             </div>
         </div>
