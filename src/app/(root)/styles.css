@@ -1,0 +1,122 @@
+.homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    min-height: 100vh;
+}
+
+/* Heading styling */
+.homepage h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1f2937;
+
+}
+
+/* Form styling */
+#ingredient-form {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+}
+
+#ingredients {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 320px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#ingredients:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+button[type="submit"] {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #3b82f6;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #2563eb;
+}
+
+button[type="submit"]:active {
+    background-color: #1d4ed8;
+}
+
+/* Error message styling */
+.homepage p {
+    color: #ef4444;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* Recipe results container */
+#recipe-results {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 800px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual recipe card styling */
+.recipe {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.recipe:hover {
+    background-color: #f9fafb;
+}
+
+.recipe:last-child {
+    border-bottom: none;
+}
+
+.recipe-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 1rem;
+}
+
+/* Recipe details styling */
+.recipe-details {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.recipe-details h3 {
+    font-size: 1.25rem;
+    color: #ef4444;
+    margin: 0 0 0.5rem;
+}
+
+.recipe-details p {
+    font-size: 0.875rem;
+    color: #374151;
+    margin: 0.25rem 0;
+}

@@ -1,65 +1,122 @@
-/* Navbar container */
 .navbar {
-    background-color: #ffffff;
-    padding: 10px 20px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e5e7eb;
     width: 100%;
-    z-index: 1000;
-  }
-  
-  .navbar-container {
-    max-width: 1300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-wrapper {
     margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.navbar-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  
-  /* Logo and title */
-  .navbar-logo {
+    height: 3.8rem;
+}
+
+/* Brand styling */
+.brand {
     display: flex;
     align-items: center;
     text-decoration: none;
-  }
-  
-  .navbar-logo-image {
-    height: 40px;
-    margin-right: 10px;
-  }
-  
-  .navbar-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .navbar-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .navbar-link {
-    text-decoration: none;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .navbar-link:hover {
-    color: #0070f3;
-  }
+}
 
-  .navbar-button {
-    font-size: 16px;
-    color: #333;
-    background: none;
-    border: none;
+.brand-icon {
+    height: 2rem;
+    width: 2rem;
+    color: #6366f1;
+}
+
+.brand-text {
+    margin-left: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1f2937;
+}
+
+/* Auth section styling */
+.auth-section {
+    display: flex;
+    align-items: center;
+}
+
+.loading-text {
+    color: #9ca3af;
+}
+
+/* Dropdown menu trigger button */
+.dropdown-trigger {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: #e5e7eb;
     cursor: pointer;
-  }
-  
-  .navbar-button:hover {
-    color: #0070f3;
-  }
-  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    transition: background-color 0.2s;
+}
+
+.dropdown-trigger:hover {
+    background-color: #d1d5db;
+}
+
+/* Dropdown menu content */
+.dropdown-content {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 12rem;
+    padding: 0.5rem 0;
+}
+
+/* Dropdown menu items */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f3f4f6;
+}
+
+.dropdown-item-icon {
+    margin-right: 0.5rem;
+    color: #6366f1;
+}
+
+/* Auth links */
+.auth-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.auth-link,
+.create-account-link {
+    color: #374151;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.auth-link:hover {
+    color: #6366f1;
+}
+
+.create-account-link {
+    color: #6366f1;
+    font-weight: 500;
+}
+
+.create-account-link:hover {
+    color: #4f46e5;
+}

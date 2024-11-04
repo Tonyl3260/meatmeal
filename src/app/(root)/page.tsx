@@ -1,13 +1,13 @@
 'use client';
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Ensure router is imported
+import { useRouter } from 'next/navigation';
 import './styles.css';
 
 const Home = () => {
     const [ingredients, setIngredients] = useState('');
     const [recipes, setRecipes] = useState([]);
     const [error, setError] = useState('');
-    const router = useRouter(); // Initialize the router
+    const router = useRouter(); 
 
     const fetchRecipes = async (event) => {
         event.preventDefault(); // Prevent the form from submitting in the traditional way
@@ -52,11 +52,11 @@ const Home = () => {
 
     // Handle recipe click and navigate to the recipe page
     const handleRecipeClick = (id) => {
-        router.push(`/recipes/${id}`); // Navigate to a new dynamic page with the recipe ID
+        router.push(`/recipes/${id}`)
     };
 
     return (
-        <div>
+        <div className= "homepage">
             <h1>meatmeal</h1>
             <form id="ingredient-form" onSubmit={fetchRecipes}>
                 <input 
@@ -66,7 +66,7 @@ const Home = () => {
                     onChange={(e) => setIngredients(e.target.value)}
                     placeholder="Enter ingredients (comma separated)"
                 />
-                <button type="submit">Find Recipes</button>
+                <button type="submit">Search</button>
             </form>
             {error && <p>{error}</p>}
             {recipes.length > 0 ? (
@@ -75,7 +75,7 @@ const Home = () => {
                         <div 
                             key={recipe.id} 
                             className="recipe" 
-                            onClick={() => handleRecipeClick(recipe.id)} // Add onClick to handle recipe click
+                            onClick={() => handleRecipeClick(recipe.id)}
                         >
                             <img 
                                 src={recipe.image} 

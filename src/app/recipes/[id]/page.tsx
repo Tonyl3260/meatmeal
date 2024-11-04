@@ -57,7 +57,7 @@ const RecipePage = ({ params }: { params: { id: string } }) => {
             <div className="recipe-content">
                 <div className="recipe-ingredients">
                     <h2>Ingredients</h2>
-                    <ul>
+                    <ul className="ingredients-list">
                         {recipe.ingredients.map((ingredient: string, index: number) => (
                             <li key={index}>{ingredient}</li>
                         ))}
@@ -65,9 +65,8 @@ const RecipePage = ({ params }: { params: { id: string } }) => {
                 </div>
                 <div className="recipe-instructions">
                     <h2>Directions</h2>
-                    <ol>
+                    <ol className="directions-list">
                         {recipe.steps.map((step: any, index: number) => (
-                            
                             <li key={index}>{step.step}</li>
                         ))}
                     </ol>
