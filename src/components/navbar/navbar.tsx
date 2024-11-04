@@ -39,8 +39,8 @@ export default function Navbar() {
             <Image
               src="/logo/meal.jpeg"
               alt="Meatmeal Logo"
-              width={50} 
-              height={50} 
+              width={32} // Adjust the width to your preference
+              height={32} // Adjust the height to your preference
               className="brand-icon"
             />
             <span className="brand-text">meatmeal</span>

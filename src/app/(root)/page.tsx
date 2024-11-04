@@ -14,7 +14,7 @@ const Home = () => {
         try {
             const res = await fetch(`http://localhost:4000/recipes?ingredients=${encodeURIComponent(ingredients)}`);
             const data = await res.json();
-            
+
             if (data && data.length) {
                 const ingredientsArray = ingredients.split(',').map(ing => ing.trim().toLowerCase()); // Convert your ingredients into an array and trim whitespace
 
@@ -45,7 +45,7 @@ const Home = () => {
             }
         } catch (error) {
             console.error('Error fetching from backend:', error);
-            setError('Failed to fetch recipes. Please try again.');
+            setError('Failed to fetch recipes');
             setRecipes([]); // Clear previous recipes
         }
     };
@@ -58,17 +58,18 @@ const Home = () => {
     return (
         <div className= "homepage">
             <h1>meatmeal</h1>
-            <form id="ingredient-form" onSubmit={fetchRecipes}>
-                <input 
-                    type="text" 
-                    id="ingredients" 
-                    value={ingredients} 
+            <form id="ingredient-form" onSubmit={fetchRecipes} style={{ textAlign: 'center' }}>
+                <input
+                    type="text"
+                    id="ingredients"
+                    value={ingredients}
                     onChange={(e) => setIngredients(e.target.value)}
                     placeholder="Enter ingredients (comma separated)"
+                    style={{ display: 'block', margin: '0 auto' }}
                 />
                 <button type="submit">Search</button>
             </form>
-            {error && <p>{error}</p>}
+            {<p>{error}</p>}
             {recipes.length > 0 ? (
                 <div id="recipe-results">
                     {recipes.map(recipe => (
@@ -77,9 +78,9 @@ const Home = () => {
                             className="recipe" 
                             onClick={() => handleRecipeClick(recipe.id)}
                         >
-                            <img 
-                                src={recipe.image} 
-                                alt={recipe.title} 
+                            <img
+                                src={recipe.image}
+                                alt={recipe.title}
                                 className="recipe-image"
                             />
                             <div className="recipe-details">
@@ -91,7 +92,7 @@ const Home = () => {
                     ))}
                 </div>
             ) : (
-                error && <p>Please try with different ingredients.</p>
+                error && <p>Please try with different ingredients</p>
             )}
         </div>
     );
