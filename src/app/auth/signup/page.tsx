@@ -47,7 +47,7 @@ const Signup = () => {
         },
     });
 
-    async function onSubmit(values: z.infer<typeof SignUpSchema>) {
+    async function onSubmit(values) {
         if (values.password !== values.confirmPassword) {
             setPasswordError("Passwords do not match.");
             return;
@@ -55,25 +55,47 @@ const Signup = () => {
 
         setLoading(true);
         try {
-            await createUserWithEmailAndPassword(auth, values.email, values.password);
-            if (auth.currentUser) {
-                await updateProfile(auth.currentUser, {
-                    displayName: values.username
-                });
+            // Create the user in Firebase
+            const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+            const user = userCredential.user;
 
-                dispatch(setAuthState({
-                    isAuthenticated: true,
-                    user: {
-                        displayName: values.username,
-                        uid: auth.currentUser.uid,
-                        email: values.email,
-                    },
-                }));
+            // Update user profile in Firebase
+            await updateProfile(user, { displayName: values.username });
 
-                router.push('/');
-            }
-        } catch (error: any) {
+            // Log to verify username
+            console.log("Syncing with backend:", {
+                uid: user.uid,
+                email: values.email,
+                username: values.username, // Check that this is populated
+            });
+
+            // Sync user with PostgreSQL
+            await fetch('http://localhost:4000/users/sync', {  
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    uid: user.uid,
+                    email: values.email,
+                    username: values.username,
+                }),
+            });
+
+            // Update local auth state
+            dispatch(setAuthState({
+                isAuthenticated: true,
+                user: {
+                    displayName: values.username,
+                    uid: user.uid,
+                    email: values.email,
+                },
+            }));
+
+            router.push('/');
+        } catch (error) {
             setLoading(false);
+            console.error("Error syncing with backend:", error);
             if (error.code === 'auth/email-already-in-use') {
                 alert("The email address is already in use by another account.");
             } else {

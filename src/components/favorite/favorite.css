@@ -1,0 +1,17 @@
+.favorite-icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-left: 10px; /* Space between details and icon */
+    align-self: center; /* Align icon to the center vertically */
+}
+.favorite-icon:hover {
+    opacity: 0.8;
+}
+
+#favorited{
+    color: black;
+}
+
+#unfavorited{
+    color: red;
+}

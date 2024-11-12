@@ -2,12 +2,13 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import './styles.css';
+import Favorite from '../../components/favorite/favorite';
 
 const Home = () => {
     const [ingredients, setIngredients] = useState('');
     const [recipes, setRecipes] = useState([]);
     const [error, setError] = useState('');
-    const router = useRouter(); 
+    const router = useRouter();
 
     const fetchRecipes = async (event) => {
         event.preventDefault(); // Prevent the form from submitting in the traditional way
@@ -55,8 +56,24 @@ const Home = () => {
         router.push(`/recipes/${id}`)
     };
 
+    const toggleFavorite = async (recipeId, isFavorite) => {
+        try {
+            await fetch(`http://localhost:4000/favorites/${recipeId}`, {
+                method: isFavorite ? 'POST' : 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+            });
+            setRecipes((prev) =>
+                prev.map((r) =>
+                    r.id === recipeId ? { ...r, isFavorite } : r
+                )
+            );
+        } catch (error) {
+            console.error('Error updating favorite:', error);
+        }
+    };
+
     return (
-        <div className= "homepage">
+        <div className="homepage">
             <h1>meatmeal</h1>
             <form id="ingredient-form" onSubmit={fetchRecipes} style={{ textAlign: 'center' }}>
                 <input
@@ -73,9 +90,9 @@ const Home = () => {
             {recipes.length > 0 ? (
                 <div id="recipe-results">
                     {recipes.map(recipe => (
-                        <div 
-                            key={recipe.id} 
-                            className="recipe" 
+                        <div
+                            key={recipe.id}
+                            className="recipe"
                             onClick={() => handleRecipeClick(recipe.id)}
                         >
                             <img
@@ -88,6 +105,11 @@ const Home = () => {
                                 <p>Ingredients listed: {recipe.usedIngredients.map(ing => ing.name).join(', ')}</p>
                                 <p>Ingredients still needed: {recipe.missedIngredients.map(ing => ing.name).join(', ')}</p>
                             </div>
+                            <Favorite
+                                recipeId={recipe.id}
+                                isFavorite={recipe.isFavorite}
+                                onToggle={toggleFavorite}
+                            />
                         </div>
                     ))}
                 </div>
